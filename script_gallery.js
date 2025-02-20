@@ -34,6 +34,8 @@ async function getImagePage() {
 
   // Generate the gallery
   for (let i = 0; i < data.length; i++) {
+    galleryBoxes[i].classList.add("loading")
+    galleryBoxes[i].style.backgroundImage = "None"
     regenerateGalleryItem(i, data)
   }
 }
@@ -41,6 +43,7 @@ async function getImagePage() {
 function regenerateGalleryItem(i, data) {
   // Set an image as box background
   let boxImageQuery = buildImageQuery(data[i]["image_id"])
+  galleryBoxes[i].classList.remove("loading")
   galleryBoxes[i].style.backgroundImage = `url(${boxImageQuery})`
 
   // Remove old link
