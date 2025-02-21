@@ -8,7 +8,7 @@ showcase images and available tours. Please check out the API
 
 If browsing online:
 
-- Visit the deployed GitHub Page [here](https://gcmoony.github.io/art_gallery/).
+- Visit the deployed GitHub Page [here](https://gcmoony.github.io/art-gallery/).
 
 If cloning the repository:
 
