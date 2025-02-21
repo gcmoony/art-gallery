@@ -17,12 +17,14 @@ next.addEventListener("click", () => {
 
 // Request the data from the api
 const PUBLIC_URL =
-  "https://api.artic.edu/api/v1/artworks/search?query[term][is_public_domain]=true&limit=5&fields=id,title,image_id,is_public_domain&page="
+  "https://api.artic.edu/api/v1/artworks/search?query[term][is_public_domain]=true&fields=id,title,image_id,is_public_domain&page="
 let pageNum = 1
+let maxPages = 0
+const itemsToDisplay = 10
 async function getImagePage() {
   currPage.innerText = pageNum
-  let builtQuery = `${PUBLIC_URL}${pageNum}`
-  console.log(builtQuery)
+  let builtQuery = `${PUBLIC_URL}${pageNum}&limit=${itemsToDisplay}`
+
   const res = await fetch(builtQuery)
   const res_json = await res.json()
   const data = res_json.data
@@ -30,6 +32,7 @@ async function getImagePage() {
   // Set total page count
   if (totalPages.innerText == "?") {
     totalPages.innerText = res_json["pagination"]["total"]
+    maxPages = res_json["pagination"]["total"]
   }
 
   // Generate the gallery
@@ -74,17 +77,25 @@ function buildImageQuery(imageID) {
 
 // Pagination
 function getNextPage() {
+  if (pageNum + 1 == maxPages) {
+    next.disabled = true
+  }
   pageNum += 1
-  prev.disabled = false
   getImagePage()
+  prev.disabled = false
+  document.body.scrollTop = 0
+  document.documentElement.scrollTop = 0
 }
 
 function getPrevPage() {
-  if (pageNum - 1 >= 1) pageNum -= 1
-  if (pageNum == 1) {
+  if (pageNum - 1 == 1) {
     prev.disabled = true
   }
+  pageNum -= 1
+  next.disabled = false
   getImagePage()
+  document.body.scrollTop = 0
+  document.documentElement.scrollTop = 0
 }
 
 // Loads gallery on page load
