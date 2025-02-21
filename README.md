@@ -13,7 +13,7 @@ If browsing online:
 If cloning the repository:
 
 - In a terminal, run the following:
-  - `git clone https://github.com/gcmoony/art_gallery.git`
+  - `git clone https://github.com/gcmoony/art-gallery.git`
 
 You can open the project in VSCode and use Live Server to see changes being made
 in real-time. Or just open `index.html` or `tours.html` in the browser and
